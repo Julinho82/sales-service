@@ -1,0 +1,47 @@
+@startuml
+set namespaceSeparator none
+
+hide method
+
+namespace users.service.model.domain {
+
+    class Sale {
+        - id: Long
+        - numberSale: Long
+        - createdDate: Date
+    }
+
+    class Employee {
+        - position: String
+    }
+
+    class Client {
+        - lastPurchase: Date
+    }
+
+    abstract class Person {
+        - id: Long
+        - email: String
+        - firstName: String
+        - lastName: String
+        - male: Male
+        - isDeleted: Boolean
+        - createdDate: Date
+    }
+
+    class Detail {
+        - id: Long
+        - totalProducts:Integer
+        - totalPrice: Long
+    }
+
+    Client -up-|> Person
+
+    Employee -up-|> Person
+
+     Sale "1..*" *-right-> "1" Employee : employee
+     Sale "1..*" *--> "1" Client : client
+
+     Detail "1" *-down-> "1" Sale : sale
+}
+@enduml
